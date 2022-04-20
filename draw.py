@@ -20,12 +20,12 @@ def drawLineLow(image, start, end, color):
     d = dA - dX
     while x < end.x:
         if d < 0:
-            d = d + dA
+            d += dA
         else:
-            d = d + dB
-            y = y + yI
+            d += dB
+            y += yI
         utils.putColor(image, point.point(x, y), color)
-        x = x + 1
+        x += 1
 
 
 def drawLineHigh(image, start, end, color):
@@ -48,10 +48,10 @@ def drawLineHigh(image, start, end, color):
         if d < 0:
             d = d + dA
         else:
-            d = d + dB
-            x = x + xI
+            d += dB
+            x += xI
         utils.putColor(image, point.point(x, y), color)
-        y = y + 1
+        y += 1
 
 
 def drawLine(image, start, end, color):
@@ -98,9 +98,9 @@ def drawCircle(image, o, r, color):
     d = 3 - 2*r
     drawsEightDrawPoints(image, point.point(x, y), o, color)
     while y >= x:
-        x = x + 1
+        x += 1
         if d > 0:
-            y = y - 1
+            y -= 1
             d = d + 4 * (x-y) + 10
         else:
             d = d + 4 * x + 6
