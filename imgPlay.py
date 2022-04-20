@@ -1,9 +1,13 @@
+import pipInstall
 import utils
 import color
 import point
 import draw
 import cv2
+import transforms
 
+def installDependencies():
+    pipInstall.pip_install("opencv-python")
 
 def test():
     width = 800
@@ -18,3 +22,11 @@ def test():
     draw.drawTriangle(image, A, B, C)
     draw.drawCircle(image, B, 25*scale, color.blue)
     cv2.imwrite("line.tiff", image)
+
+def test1():
+    A = point.point(1, 1)
+    T = point.point(2,2)
+    B = transforms.scale(A, T)
+    C = transforms.translate(A,T)
+    print(B.array)
+    print(C.array)
