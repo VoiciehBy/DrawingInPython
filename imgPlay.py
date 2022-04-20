@@ -3,7 +3,6 @@ import color
 import point
 import draw
 import cv2
-import pipInstall
 
 
 def test():
@@ -19,11 +18,3 @@ def test():
     draw.drawTriangle(image, A, B, C)
     draw.drawCircle(image, B, 25*scale, color.blue)
     cv2.imwrite("line.tiff", image)
-
-
-def main():
-    pipInstall.installDependencies()
-    test()
-
-
-main()
