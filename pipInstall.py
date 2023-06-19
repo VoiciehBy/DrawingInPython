@@ -1,4 +1,5 @@
-import subprocess
+from subprocess import call as subprocess_call
+
 
 def pip_install(packageName):
-    subprocess.call(["pip", "install", packageName])
+    subprocess_call(["pip", "install", packageName])

@@ -1,65 +1,68 @@
-import point
-import color
-import utils
-import math
+from numpy import array
+from point import point
+from color import blue, cyan, red
+from utils import putColor, distanceOf
+from math import fabs as math_fabs
 
-def drawLineLow(image, start, end, color):
-    x = start.x
-    y = start.y
 
-    dX = end.x - start.x
-    dY = end.y - start.y
-    yI = 1
+def drawLineLow(image: array, start: point, end: point, color):
+    x: int = int(start.x)
+    y: int = int(start.y)
 
-    dA = 2 * dY
-    dB = 2 * (dY - dX)
+    dX: int = int(end.x - start.x)
+    dY: int = int(end.y - start.y)
+    yI: int = int(1)
+
+    dA: int = int(2 * dY)
+    dB: int = int(2 * (dY - dX))
+
     if dY < 0:
         yI = -1
         dY = -dY
 
-    d = dA - dX
+    d: int = int(dA - dX)
     while x < end.x:
         if d < 0:
             d += dA
         else:
             d += dB
             y += yI
-        utils.putColor(image, point.point(x, y), color)
+        putColor(image, point(x, y), color)
         x += 1
 
 
-def drawLineHigh(image, start, end, color):
-    x = start.x
-    y = start.y
+def drawLineHigh(image: array, start: point, end: point, color):
+    x: int = int(start.x)
+    y: int = int(start.y)
 
-    dX = end.x - start.x
-    dY = end.y - start.y
-    xI = 1
+    dX: int = int(end.x - start.x)
+    dY: int = int(end.y - start.y)
+    xI = int(1)
 
-    dA = 2 * dX
-    dB = 2 * (dX - dY)
+    dA: int = int(2 * dX)
+    dB: int = int(2 * (dX - dY))
 
     if dX < 0:
         xI = -1
         dX = -dX
 
-    d = dA - dY
+    d: int = int(dA - dY)
     while y < end.y:
         if d < 0:
             d = d + dA
         else:
             d += dB
             x += xI
-        utils.putColor(image, point.point(x, y), color)
+        putColor(image, point(x, y), color)
         y += 1
 
 
-def drawLine(image, start, end, color):
-    x = start.x
-    y = start.y
-    utils.putColor(image, point.point(x, y), color)
+def drawLine(image: array, start: point, end: point, color):
+    x: int = int(start.x)
+    y: int = int(start.y)
+    putColor(image, point(x, y), color)
 
-    if math.fabs(end.y - start.y) < math.fabs(end.x - start.x):
+    if math_fabs(end.y - start.y) < math_fabs(end.x - start.x):
         if start.x > end.x:
             drawLineLow(image, end, start, color)
         else:
@@ -71,32 +74,32 @@ def drawLine(image, start, end, color):
             drawLineHigh(image, start, end, color)
 
 
-def drawTriangle(image, A, B, C):
-    a = utils.distanceOf(A, B)
-    b = utils.distanceOf(B, C)
-    c = utils.distanceOf(C, A)
+def drawTriangle(image: array, A: point, B: point, C: point):
+    a = distanceOf(A, B)
+    b = distanceOf(B, C)
+    c = distanceOf(C, A)
     if(((a + b) > c) and ((b + c) > a) and ((a + c) > b)):
-        drawLine(image, A, B, color.blue)
-        drawLine(image, A, C, color.cyan)
-        drawLine(image, B, C, color.red)
+        drawLine(image, A, B, blue)
+        drawLine(image, A, C, cyan)
+        drawLine(image, B, C, red)
 
 
-def drawsEightDrawPoints(image, a, o, color):
-    utils.putColor(image, point.point(o.x+a.x, o.y+a.y), color)
-    utils.putColor(image, point.point(o.x+a.y, o.y+a.x), color)
-    utils.putColor(image, point.point(o.x+a.y, o.y-a.x), color)
-    utils.putColor(image, point.point(o.x+a.x, o.y-a.y), color)
-    utils.putColor(image, point.point(o.x-a.x, o.y-a.y), color)
-    utils.putColor(image, point.point(o.x-a.y, o.y-a.x), color)
-    utils.putColor(image, point.point(o.x-a.y, o.y+a.x), color)
-    utils.putColor(image, point.point(o.x-a.x, o.y+a.y), color)
+def drawsEightDrawPoints(image: array, a, o, color):
+    putColor(image, point(o.x+a.x, o.y+a.y), color)
+    putColor(image, point(o.x+a.y, o.y+a.x), color)
+    putColor(image, point(o.x+a.y, o.y-a.x), color)
+    putColor(image, point(o.x+a.x, o.y-a.y), color)
+    putColor(image, point(o.x-a.x, o.y-a.y), color)
+    putColor(image, point(o.x-a.y, o.y-a.x), color)
+    putColor(image, point(o.x-a.y, o.y+a.x), color)
+    putColor(image, point(o.x-a.x, o.y+a.y), color)
 
 
-def drawCircle(image, o, r, color):
+def drawCircle(image: array, o, r, color):
     x = 0
     y = r
     d = 3 - 2*r
-    drawsEightDrawPoints(image, point.point(x, y), o, color)
+    drawsEightDrawPoints(image, point(x, y), o, color)
     while y >= x:
         x += 1
         if d > 0:
@@ -104,4 +107,4 @@ def drawCircle(image, o, r, color):
             d = d + 4 * (x-y) + 10
         else:
             d = d + 4 * x + 6
-        drawsEightDrawPoints(image, point.point(x, y), o, color)
+        drawsEightDrawPoints(image, point(x, y), o, color)

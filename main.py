@@ -1,8 +1,10 @@
-import imgPlay
+from imgPlay import installDependencies, test, test1
+
 
 def main():
-    imgPlay.installDependencies()
-    imgPlay.test()
-    imgPlay.test1()
+    installDependencies()
+    test()
+    test1()
+
 
 main()

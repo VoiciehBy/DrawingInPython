@@ -1,32 +1,38 @@
-import pipInstall
-import utils
-import color
-import point
-import draw
-import cv2
+from pipInstall import pip_install
+from utils import generateSolidImage, showImage
+from numpy import array
+from color import yellow, blue
+from point import point
+from draw import drawTriangle, drawCircle
+from cv2 import imwrite as cv2_imwrite
+
 import transforms
 
+
 def installDependencies():
-    pipInstall.pip_install("opencv-python")
+    pip_install("opencv-python")
+
 
 def test():
-    width = 800
-    height = 600
-    scale = 1
-    image = utils.generateSolidImage(width, height, color.yellow)
+    width: int = 800
+    height: int = 600
+    scale: int = 1
+    image: array = generateSolidImage(width, height, yellow)
 
-    A = point.point(5*scale, 5*scale)
-    B = point.point(120*scale, 80*scale)
-    C = point.point(60*scale, 60*scale)
+    A: point = point(5*scale, 5*scale)
+    B: point = point(120*scale, 80*scale)
+    C: point = point(60*scale, 60*scale)
 
-    draw.drawTriangle(image, A, B, C)
-    draw.drawCircle(image, B, 25*scale, color.blue)
-    cv2.imwrite("line.tiff", image)
+    drawTriangle(image, A, B, C)
+    drawCircle(image, B, 25*scale, blue)
+    cv2_imwrite("test.tiff", image)
+    showImage(image)
+
 
 def test1():
-    A = point.point(1, 1)
-    T = point.point(2,2)
-    B = transforms.scale(A, T)
-    C = transforms.translate(A,T)
+    A: point = point(1, 1)
+    T: point = point(2, 2)
+    B: matrix = transforms.scale(A, T)
+    C: matrix = transforms.translate(A, T)
     print(B.array)
     print(C.array)

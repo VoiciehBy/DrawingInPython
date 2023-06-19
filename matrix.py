@@ -1,8 +1,8 @@
-import numpy
+from numpy import zeros
 
 
 class matrix:
-    def __init__(self, n, m):
-        self.n = n
-        self.m = m
-        self.array = numpy.zeros((n, m))
+    def __init__(self, n: int, m: int):
+        self.n = int(n)
+        self.m = int(m)
+        self.array = zeros((n, m))
