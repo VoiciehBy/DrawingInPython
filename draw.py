@@ -1,17 +1,18 @@
 from numpy import array
 from point import point
+from color import color as Color
 from color import blue, cyan, red
 from utils import putColor, distanceOf
 from math import fabs as math_fabs
 
 
-def drawLineLow(image: array, start: point, end: point, color):
+def drawLineLow(image: array, start: point, end: point, color: Color):
     x: int = int(start.x)
     y: int = int(start.y)
 
     dX: int = int(end.x - start.x)
     dY: int = int(end.y - start.y)
-    yI: int = int(1)
+    yI: int = 1
 
     dA: int = int(2 * dY)
     dB: int = int(2 * (dY - dX))
@@ -31,13 +32,13 @@ def drawLineLow(image: array, start: point, end: point, color):
         x += 1
 
 
-def drawLineHigh(image: array, start: point, end: point, color):
+def drawLineHigh(image: array, start: point, end: point, color: Color):
     x: int = int(start.x)
     y: int = int(start.y)
 
     dX: int = int(end.x - start.x)
     dY: int = int(end.y - start.y)
-    xI = int(1)
+    xI: int = 1
 
     dA: int = int(2 * dX)
     dB: int = int(2 * (dX - dY))
@@ -57,7 +58,7 @@ def drawLineHigh(image: array, start: point, end: point, color):
         y += 1
 
 
-def drawLine(image: array, start: point, end: point, color):
+def drawLine(image: array, start: point, end: point, color: Color):
     x: int = int(start.x)
     y: int = int(start.y)
     putColor(image, point(x, y), color)
@@ -95,10 +96,10 @@ def drawsEightDrawPoints(image: array, a, o, color):
     putColor(image, point(o.x-a.x, o.y+a.y), color)
 
 
-def drawCircle(image: array, o, r, color):
+def drawCircle(image: array, o, radius, color: Color):
     x = 0
-    y = r
-    d = 3 - 2*r
+    y = radius
+    d = 3 - 2*radius
     drawsEightDrawPoints(image, point(x, y), o, color)
     while y >= x:
         x += 1
