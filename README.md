@@ -5,3 +5,5 @@ Dependencies:
 ```
 pip install opencv-python
 ```
+
+![test](https://github.com/VoiciehBy/DrawingInPython/test.png)
